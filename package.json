@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
+    "start": "tsc && node --unhandled-rejections=strict ./dist/src/server.js",
     "debug": "export DEBUG=* && npm run start",
     "test": "mocha"
   },
@@ -22,7 +22,9 @@
     "express-winston": "^4.2.0",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
+    "reflect-metadata": "^0.1.13",
     "ts-node": "^10.7.0",
+    "typedi": "^0.10.0",
     "winston": "^3.7.2"
   },
   "devDependencies": {
