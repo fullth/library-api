@@ -1,5 +1,4 @@
 import mysql from 'mysql2';
-import * as dotenv from 'dotenv';
 
 import { development as dev} from './mysql-config.db'
 

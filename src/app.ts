@@ -8,11 +8,11 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 
 export class App {
-    private app: express.Application;
+    private app: express.Application = express();
     constructor() {
-        this.app = express();
+        /** @Question setMiddleware()가 먼저 호출되면 라우트가 동작하지 않는 이유. */
+        this.setRoutes(); 
         this.setMiddleware();
-        this.setRoutes();
         this.setLogger();
     }
 
@@ -24,12 +24,7 @@ export class App {
 
     private setRoutes(): void {
         this.app.use('/api', router);
-        this.app.use('/', (req: Request, res: Response) => {
-            res.status(200).send('Server Connected!');
-        });
-        this.app.use((req, res, next) => {
-            res.status(404).send('NOT FOUND');
-        })
+        this.app.use((req: Request, res: Response, next) => { res.status(404).send('NOT FOUND'); });
     }
 
     private setLogger(): void{

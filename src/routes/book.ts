@@ -3,13 +3,15 @@ import { BookController } from '../controller/book';
 import { Container } from "typedi";
 
 const router = Router();
-const bookController = Container.get(BookController);
+const bookController = Container.get<BookController>('book.controller');
 
-router.route('/book?{orderBy}')
-    .get(bookController.read)
-
-router.route('/book/:id')
+router.route('/')
     .post(bookController.create)
+
+router.route('/?{orderBy}')
+    .get(bookController.getAll)
+
+router.route('/:id')
     .patch(bookController.update)
     .delete(bookController.delete)
 
