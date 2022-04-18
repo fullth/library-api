@@ -8,18 +8,21 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 
 export class App {
-    private app: express.Application = express();
+    private app: express.Application;
     constructor() {
-        /** @Question setMiddleware()가 먼저 호출되면 라우트가 동작하지 않는 이유. */
+        // 순서랑은 관계 없을 것.
+        this.app = express();
         this.setRoutes(); 
         this.setMiddleware();
         this.setLogger();
     }
 
     private setMiddleware(): void {
+        // console.log(this)
         this.app.use(express.json);
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(cors());
+        
     }
 
     private setRoutes(): void {

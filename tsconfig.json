@@ -8,6 +8,8 @@
     "inlineSourceMap": true,
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true, // Effective TypeScript item02
+    "strictNullChecks": true // Effective TypeScript item02
   }
 }

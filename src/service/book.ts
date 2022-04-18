@@ -2,28 +2,26 @@ import { CreateBookDto } from '../interface/book/dto/create-book.dto';
 import { BookRepository } from '../db/repository/book';
 import { Container, Inject, Service } from 'typedi';
 
-@Service({id: 'book.service'})
+@Service()
 export class BookService {
-    private readonly bookRepository: BookRepository;
-    
-    constructor (@Inject('book.repository') bookRepository: BookRepository) {
-        this.bookRepository = bookRepository;
-        console.dir(bookRepository);
-    }
+    constructor (@Inject() private readonly bookRepository: BookRepository) {}
 
-    public async create(createData: CreateBookDto) {
-        this.bookRepository.create(createData);
+    public create(createData: CreateBookDto) {
+        // const getBody = (req: Request) => {
+        //     console.log(req.body)
+        // }
+        return this.bookRepository.create(createData);
     };
 
     public async getAll(orderBy: string) {
-        this.bookRepository.getAll(orderBy);
+        return this.bookRepository.getAll(orderBy);
     };
 
     public async update(id: number) {
-        this.bookRepository.update(id);
+        return this.bookRepository.update(id);
     };
 
     public async delete(id: number) {
-        this.bookRepository.delete(id);
+        return this.bookRepository.delete(id);
     };
 }
