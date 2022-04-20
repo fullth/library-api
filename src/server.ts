@@ -1,6 +1,6 @@
 import { App } from './app';
 
-const TaeHwanServer = async function(): Promise<void> {
+const server = async function(): Promise<void> {
     try {
         const app = new App();
         const port = 3000;
@@ -10,7 +10,7 @@ const TaeHwanServer = async function(): Promise<void> {
     }
 }
 
-TaeHwanServer();
+server();
 
 /*
 async await vs Promise
