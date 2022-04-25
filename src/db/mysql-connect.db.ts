@@ -8,5 +8,3 @@ export const connection = mysql.createConnection({
   password : dev.password,
   database : dev.database
 });
- 
-connection.connect();

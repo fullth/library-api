@@ -5,44 +5,38 @@ import { BookDto } from '../interface/book/dto/book.dto';
 
 @Service()
 export class BookController {
-    constructor(@Inject() private readonly bookService: BookService) { }
+  constructor(@Inject() private readonly bookService: BookService) { }
 
-    /* @Issue TypeError: Cannot read properties of undefined (reading 'bookService') 
-     * 객체 내부의 존재하지 않는 프로퍼티에 접근하였기 때문에 undefined.
-     * why? -> this를 호출하는 주체가 app.ts에 존재하는 bookController인데, 해당 this는 전역을 바라보고 있기 때문.
-     * this: 호출하는 주체의 정보 
-     *       default: 전역 객체 
-     */
-    // public async create(req: Request) {
-    //     console.log(req.body)
-    // };
+  /** 신규 책 등록 */
+  public create = async (req: Request, res: Response) => {
+    const bookName: BookDto = req.body;
+    const result = await this.bookService.create(bookName);
+    res.send(result);
+  };
 
-    /** 신규 책 등록 */
-    public create = async (req: Request, res: Response) => {
-        const bookName: BookDto = req.body;
-        res.send(this.bookService.create(bookName));
-    };
+  /** 책 정보 조회 */
+  public getAll = async (req: Request, res: Response) => {
+    const orderBy: string = req.query.orderBy as string;
+    //const orderBy: string = JSON.stringify(req.query.orderBy).replace(/\"/g,'');
+    const result = await this.bookService.getAll(orderBy);
+    res.send(result);
+  };
 
-    /** 책 정보 조회 */
-    public getAll = async (req: Request, res: Response) => {
-        const orderBy: string = req.params.orderby;
+  /** 책 정보 수정 */
+  public update = async (req: Request, res: Response) => {
+    const id: number = Number.parseInt(req.body.id);
+    const name: string = req.body.name;
 
-        res.send(this.bookService.getAll(orderBy))
-    };
+    const result = await this.bookService.update(id, name);
+    res.send(result);
+  };
 
-    /** 책 정보 수정 */
-    public async update(req: Request, res: Response) {
-        const id: number = Number.parseInt(req.params.id);
-        const name: string = req.params.name;
+  /** 책 정보 삭제(생성자만 삭제할 수 있음.) */
+  public delete = async (req: Request, res: Response) => {
+    const id: string = req.body.id;
+    const name: string = req.body.name;
 
-        res.send(this.bookService.update(id, name));
-    }
-
-    /** 책 정보 삭제 */
-    public async delete(req: Request, res: Response) {
-        const id: number = Number.parseInt(req.params.id);
-        const name: string = req.params.name;
-
-        res.send(this.bookService.delete(id, name));
-    }
+    const result = await this.bookService.delete(id, name);
+    res.send(result);
+  };
 }

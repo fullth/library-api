@@ -1,4 +1,4 @@
-export class BookDto {
-    readonly id: number;
-    readonly name: string;
+export interface BookDto {
+  readonly id: string;
+  readonly name: string;
 }

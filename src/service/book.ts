@@ -4,36 +4,25 @@ import { Inject, Service } from 'typedi';
 
 @Service()
 export class BookService {
-    constructor (@Inject() private readonly bookRepository: BookRepository) {}
+  constructor(@Inject() private readonly bookRepository: BookRepository) { }
 
-    public async create(data: BookDto) {
-        return this.bookRepository.create(data);
-    };
+  public async create(data: BookDto) {
+    const result = await this.bookRepository.create(data);
+    return result;
+  };
 
-    public async getAll(orderBy: string) {
-        await this.bookRepository.getAll(orderBy)
-            .then((result) => {
-                console.log(result);
-                return result;
-            })
-            .catch(console.log);
-    };
+  public async getAll(orderBy: string) {
+    const result = await this.bookRepository.getAll(orderBy);
+    return result;
+  }
 
-    public async update(id: number, name: string) {
-        await this.bookRepository.update(id)
-            .then((result) => {
-                console.log(result);
-                return result;
-            })
-            .catch(console.log);
-    };
+  public async update(id: number, name: string) {
+    const result = await this.bookRepository.update(id, name);
+    return result;
+  };
 
-    public async delete(id: number, name: string) {
-        await this.bookRepository.delete(id)
-            .then((result) => {
-                console.log(result);
-                return result;
-            })
-            .catch(console.log);
-    };
+  public async delete(id: string, name: string) {
+    const result = await this.bookRepository.delete(id, name)
+    return result;
+  };
 }

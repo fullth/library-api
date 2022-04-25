@@ -6,11 +6,11 @@ const router = Router();
 const bookController = Container.get(BookController);
 
 router.route('/')
-    .get(bookController.getAll)
-    .post(bookController.create);
+  .get(bookController.getAll)
+  .post(bookController.create);
 
 router.route('/:id')
-    .patch(bookController.update)
-    .delete(bookController.delete);
+  .patch(bookController.update)
+  .delete(bookController.delete);
 
 export default router;
